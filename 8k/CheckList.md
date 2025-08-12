@@ -97,8 +97,7 @@
 
 # 작업 목록
 
-- 8k 84A, 84B, 84C 의 corridor 작업 진행.
-
 # 작업 완료
 
 - 4k의 84A, 84B ref2,ref3 를 8k로 이동
+- 8k 84A, 84B, 84C 의 corridor 작업 진행.

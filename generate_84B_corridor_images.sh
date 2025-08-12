@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 84B Corridor 이미지 생성 스크립트
-cd /Users/shhan/Workspace/backup/cdn-gs-mall/2025_08_10_0010/8k/84A/corridor
+cd /Users/shhan/Workspace/backup/cdn-gs-mall/2025_08_10_0010/8k/84B/corridor
 
 echo "🎨 84B Corridor 이미지 생성 시작"
 echo "현재 위치: $(pwd)"
