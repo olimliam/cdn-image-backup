@@ -3,7 +3,7 @@
 # 이미지를 4K 해상도로 줄이고 WebP 포맷으로 변환하는 스크립트
 
 # 작업 디렉토리 설정
-WORK_DIR="/Users/shhan/Workspace/backup/cdn-gs-mall/2025_08_10_0010/temp"
+WORK_DIR="/Users/shhan/Workspace/backup/cdn-gs-mall/2025_08_10_0010/temp1"
 cd "$WORK_DIR"
 
 echo "🖼️ 이미지 4K WebP 변환 작업 시작"
