@@ -3,7 +3,7 @@
 # 이미지를 8K 해상도로 늘리고 WebP 포맷으로 변환하는 스크립트
 
 # 작업 디렉토리 설정
-WORK_DIR="/Users/shhan/Workspace/backup/cdn-gs-mall/2025_08_10_0010/temp"
+WORK_DIR="/Users/shhan/Workspace/backup/cdn-gs-mall/image-backup-system/temp"
 WEBP_OUTPUT_DIR="$WORK_DIR/webp_8k"
 
 cd "$WORK_DIR"
