@@ -3,11 +3,20 @@
 # 이미지를 8K 해상도로 늘리고 WebP 포맷으로 변환하는 스크립트
 
 # 작업 디렉토리 설정
-WORK_DIR="/Users/shhan/Workspace/backup/cdn-gs-mall/2025_08_10_0010/temp1"
+WORK_DIR="/Users/shhan/Workspace/backup/cdn-gs-mall/2025_08_10_0010/temp"
+WEBP_OUTPUT_DIR="$WORK_DIR/webp_8k"
+
 cd "$WORK_DIR"
 
 echo "🖼️ 이미지 8K WebP 변환 작업 시작"
 echo "현재 위치: $(pwd)"
+echo "WebP 출력 디렉토리: $WEBP_OUTPUT_DIR"
+
+# webp 출력 디렉토리 생성
+if [ ! -d "$WEBP_OUTPUT_DIR" ]; then
+    echo "📁 WebP 출력 디렉토리 생성: $WEBP_OUTPUT_DIR"
+    mkdir -p "$WEBP_OUTPUT_DIR"
+fi
 echo ""
 
 # ImageMagick이 설치되어 있는지 확인
@@ -37,24 +46,34 @@ echo "=== 설정 정보 ==="
 echo "목표 해상도: ${TARGET_WIDTH}x${TARGET_HEIGHT} (8K)"
 echo "WebP 품질: ${WEBP_QUALITY}"
 echo "작업 디렉토리: $WORK_DIR"
+echo "WebP 출력 디렉토리: $WEBP_OUTPUT_DIR"
 echo ""
 
 # 재귀적으로 모든 하위 디렉토리에서 이미지 파일 찾기
 find . -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.tiff" -o -iname "*.tif" -o -iname "*.bmp" \) | while read -r image_file; do
-    # 파일명에서 확장자 제거
-    base_name="${image_file%.*}"
+    # 파일의 상대 경로에서 디렉토리 구조 추출
+    relative_dir=$(dirname "$image_file")
     
-    # 출력 파일명 (.webp)
-    output_file="${base_name}.webp"
+    # webp 폴더 내에 동일한 디렉토리 구조 생성
+    output_dir="$WEBP_OUTPUT_DIR/$relative_dir"
+    if [ ! -d "$output_dir" ]; then
+        mkdir -p "$output_dir"
+    fi
+    
+    # 파일명에서 확장자 제거
+    base_name=$(basename "${image_file%.*}")
+    
+    # 출력 파일명 (.webp) - webp 폴더 내의 해당 경로에 저장
+    output_file="$output_dir/${base_name}.webp"
     
     # 이미 WebP 파일이 존재하는지 확인
     if [ -f "$output_file" ]; then
-        echo "⏭️  건너뜀: $output_file (이미 존재)"
+        echo "⏭️  건너뜀: $(basename "$output_file") (이미 존재)"
         ((skipped_count++))
         continue
     fi
     
-    echo "🔄 변환 중: $image_file"
+    echo "🔄 변환 중: $image_file → webp/$relative_dir/$(basename "$output_file")"
     
     # ImageMagick을 사용하여 이미지 변환
     # -resize: 8K 해상도로 크기 조정 (비율 유지)
@@ -68,7 +87,7 @@ find . -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname 
             -define webp:lossless=false \
             -define webp:alpha-quality=100 \
             "$output_file"; then
-            echo "✅ 성공: $output_file"
+            echo "✅ 성공: webp/$relative_dir/$(basename "$output_file")"
             ((converted_count++))
         else
             echo "❌ 실패: $image_file"
@@ -82,7 +101,7 @@ find . -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname 
             -define webp:lossless=false \
             -define webp:alpha-quality=100 \
             "$output_file"; then
-            echo "✅ 성공: $output_file"
+            echo "✅ 성공: webp/$relative_dir/$(basename "$output_file")"
             ((converted_count++))
         else
             echo "❌ 실패: $image_file"
