@@ -4,7 +4,7 @@
 # 원본 폴더: temp
 # 대상 폴더: temp/webp_2k
 
-SRC_DIR="temp"
+SRC_DIR="temp/webp_8k"
 DST_DIR="temp/webp_2k"
 
 # 2K 해상도 (QHD)
