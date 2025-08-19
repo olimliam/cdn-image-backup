@@ -2,14 +2,32 @@ aws s3 sync ./8k/84A s3://cdn-prd-option-mall/gs-mall/8k/84A/
 aws s3 sync ./8k/84B s3://cdn-prd-option-mall/gs-mall/8k/84B/
 aws s3 sync ./8k/84C s3://cdn-prd-option-mall/gs-mall/8k/84C/
 
-aws s3 sync ./4k/84A s3://cdn-prd-option-mall/gs-mall/4k/84A/
-aws s3 sync ./4k/84B s3://cdn-prd-option-mall/gs-mall/4k/84B/
-aws s3 sync ./4k/84C s3://cdn-prd-option-mall/gs-mall/4k/84C/
-
 aws s3 sync ./8k/84A s3://cdn-dev-option-mall/gs-mall/8k/84A/
 aws s3 sync ./8k/84B s3://cdn-dev-option-mall/gs-mall/8k/84B/
 aws s3 sync ./8k/84C s3://cdn-dev-option-mall/gs-mall/8k/84C/
 
+
+aws s3 sync ./4k/84A s3://cdn-prd-option-mall/gs-mall/4k/84A/
+aws s3 sync ./4k/84B s3://cdn-prd-option-mall/gs-mall/4k/84B/
+aws s3 sync ./4k/84C s3://cdn-prd-option-mall/gs-mall/4k/84C/
+
 aws s3 sync ./4k/84A s3://cdn-dev-option-mall/gs-mall/4k/84A/
 aws s3 sync ./4k/84B s3://cdn-dev-option-mall/gs-mall/4k/84B/
 aws s3 sync ./4k/84C s3://cdn-dev-option-mall/gs-mall/4k/84C/
+
+
+aws s3 sync ./2k/84A s3://cdn-prd-option-mall/gs-mall/2k/84A/
+aws s3 sync ./2k/84B s3://cdn-prd-option-mall/gs-mall/2k/84B/
+aws s3 sync ./2k/84C s3://cdn-prd-option-mall/gs-mall/2k/84C/
+
+aws s3 sync ./2k/84A s3://cdn-dev-option-mall/gs-mall/2k/84A/
+aws s3 sync ./2k/84B s3://cdn-dev-option-mall/gs-mall/2k/84B/
+aws s3 sync ./2k/84C s3://cdn-dev-option-mall/gs-mall/2k/84C/
+
+
+
+aws s3 sync ./8k/84A/corridor s3://cdn-prd-option-mall/gs-mall/8k/84A/corridor
+aws s3 sync ./8k/84A/corridor s3://cdn-dev-option-mall/gs-mall/8k/84A/corridor
+
+aws s3 sync ./4k/84A/corridor s3://cdn-prd-option-mall/gs-mall/4k/84A/corridor
+aws s3 sync ./4k/84A/corridor s3://cdn-dev-option-mall/gs-mall/4k/84A/corridor
