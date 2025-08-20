@@ -31,3 +31,6 @@ aws s3 sync ./8k/84A/corridor s3://cdn-dev-option-mall/gs-mall/8k/84A/corridor
 
 aws s3 sync ./4k/84A/corridor s3://cdn-prd-option-mall/gs-mall/4k/84A/corridor
 aws s3 sync ./4k/84A/corridor s3://cdn-dev-option-mall/gs-mall/4k/84A/corridor
+
+
+aws s3 sync s3://cdn-prd-option-mall/gs-mall/8k/ ./8k
