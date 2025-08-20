@@ -4,8 +4,8 @@
 # 원본 폴더: 8k
 # 대상 폴더: 4k_resized
 
-SRC_DIR="/Users/shhan/Workspace/backup/cdn-gs-mall/2025_08_10_0010/temp"
-DST_DIR="/Users/shhan/Workspace/backup/cdn-gs-mall/2025_08_10_0010/4k/84B/ent"
+SRC_DIR="/c/yjgoh/img-clone/8k/84A/bed1"
+DST_DIR="/c/yjgoh/img-clone/4k/84A/bed1/4k_resize"
 
 # 4K 해상도
 TARGET_WIDTH=3840
