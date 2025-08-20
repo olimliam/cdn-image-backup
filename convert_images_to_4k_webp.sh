@@ -3,7 +3,8 @@
 # 이미지를 4K 해상도로 줄이고 WebP 포맷으로 변환하는 스크립트
 
 # 작업 디렉토리 설정
-WORK_DIR="/Users/shhan/Workspace/backup/cdn-gs-mall/image-backup-system/temp"
+# WORK_DIR="/Users/shhan/Workspace/backup/cdn-gs-mall/image-backup-system/temp"
+WORK_DIR="/c/yjgoh/img-clone/temp"
 WEBP_OUTPUT_DIR="$WORK_DIR/webp_4k"
 
 cd "$WORK_DIR"
