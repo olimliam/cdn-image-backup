@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# temp 폴더 내 모든 이미지를 4k WebP로 변환하여 저장하는 스크립트
+# temp 폴더 내 모든 이미지를 4k WebP로 변환하여 저장하는 스크립트 (병렬 처리)
 # 원본 폴더: temp
 # 대상 폴더: temp/webp_4k
 
-SRC_DIR="temp"
+SRC_DIR="temp/webp_8k"
 DST_DIR="temp/webp_4k"
 
 # 4K 해상도
@@ -12,9 +12,13 @@ TARGET_WIDTH=3840
 TARGET_HEIGHT=2160
 
 # WebP 품질
-WEBP_QUALITY=90
+WEBP_QUALITY=100
 
-echo "=== temp 폴더 파일을 4k WebP로 변환 시작 ==="
+# CPU 코어 수 자동 감지 (macOS)
+MAX_JOBS=$(sysctl -n hw.ncpu)
+
+echo "=== temp 폴더 파일을 4k WebP로 변환 시작 (병렬 처리) ==="
+echo "🚀 병렬 처리 활성화: ${MAX_JOBS}개 코어 사용"
 
 # ImageMagick 확인
 if ! command -v convert &> /dev/null && ! command -v magick &> /dev/null; then
@@ -25,16 +29,12 @@ fi
 # 대상 디렉토리 생성
 mkdir -p "$DST_DIR"
 
-# 변환된 파일 카운터
-converted_count=0
-
-# find로 모든 이미지 파일 탐색 (webp, png, jpg, jpeg, bmp, tiff)
-find "$SRC_DIR" -maxdepth 1 -type f \( -iname "*.webp" -o -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.bmp" -o -iname "*.tiff" -o -iname "*.tif" \) | while read -r src_file; do
-    # 파일명만 추출 (경로 제거)
-    filename=$(basename "$src_file")
-    # 확장자를 .webp로 변경
-    filename_no_ext="${filename%.*}"
-    dst_file="$DST_DIR/${filename_no_ext}.webp"
+# 단일 파일 변환 함수
+convert_single_file() {
+    local src_file=$1
+    local filename=$(basename "$src_file")
+    local filename_no_ext="${filename%.*}"
+    local dst_file="$DST_DIR/${filename_no_ext}.webp"
 
     # 변환
     echo "🔄 변환 중: $filename → ${filename_no_ext}.webp"
@@ -47,16 +47,28 @@ find "$SRC_DIR" -maxdepth 1 -type f \( -iname "*.webp" -o -iname "*.png" -o -ina
 
     if [ $? -eq 0 ]; then
         echo "✅ 완료: ${filename_no_ext}.webp"
-        ((converted_count++))
+        return 0
     else
         echo "❌ 실패: $filename"
+        return 1
     fi
+}
 
-done
+export -f convert_single_file
+export DST_DIR TARGET_WIDTH TARGET_HEIGHT WEBP_QUALITY
+
+# find로 모든 이미지 파일을 찾고 병렬로 처리
+find "$SRC_DIR" -maxdepth 1 -type f \( -iname "*.webp" -o -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.bmp" -o -iname "*.tiff" -o -iname "*.tif" \) | \
+xargs -I {} -P "$MAX_JOBS" bash -c 'convert_single_file "$@"' _ {}
+
+# 변환된 파일 수 계산
+converted_count=$(ls -1 "$DST_DIR"/*.webp 2>/dev/null | wc -l)
 
 echo ""
 echo "=== 변환 완료 ==="
 echo "변환된 파일 수: $converted_count"
 echo "결과 디렉토리: $DST_DIR"
+echo "병렬 처리로 속도 향상!"
+echo ""
 echo "변환된 파일 목록:"
 ls -la "$DST_DIR"/*.webp 2>/dev/null || echo "변환된 파일이 없습니다."

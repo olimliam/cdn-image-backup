@@ -20,7 +20,7 @@ copy_and_convert() {
     
     if [ -f "$SOURCE_DIR/$source_file" ]; then
         # PNG 파일을 WebP로 변환하면서 복사
-        cwebp "$SOURCE_DIR/$source_file" -o "$TARGET_DIR/$target_file" -q 90
+        cwebp "$SOURCE_DIR/$source_file" -o "$TARGET_DIR/$target_file" -q 100
         echo "생성: $target_file"
     else
         echo "경고: 소스 파일 '$source_file'를 찾을 수 없습니다."
