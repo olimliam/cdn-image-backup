@@ -28,14 +28,14 @@ if ! command -v convert &> /dev/null && ! command -v magick &> /dev/null; then
 fi
 
 # 변환할 이미지 확장자 목록
-IMAGE_EXTENSIONS=("*.jpg" "*.jpeg" "*.png" "*.tiff" "*.tif" "*.bmp")
+IMAGE_EXTENSIONS=("*.jpg" "*.jpeg" "*.png" "*.tiff" "*.tif" "*.bmp" "*.webp")
 
 # 4K 해상도 설정 (3840x2160)
 TARGET_WIDTH=3840
 TARGET_HEIGHT=2160
 
 # WebP 품질 설정 (0-100, 85는 높은 품질)
-WEBP_QUALITY=85
+WEBP_QUALITY=100
 
 # 변환된 파일 카운터
 converted_count=0
@@ -50,7 +50,7 @@ echo "WebP 출력 디렉토리: $WEBP_OUTPUT_DIR"
 echo ""
 
 # 재귀적으로 모든 하위 디렉토리에서 이미지 파일 찾기
-find . -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.tiff" -o -iname "*.tif" -o -iname "*.bmp" \) | while read -r image_file; do
+find . -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.tiff" -o -iname "*.tif" -o -iname "*.bmp" -o -iname "*.webp" \) | while read -r image_file; do
     # 파일의 상대 경로에서 디렉토리 구조 추출
     relative_dir=$(dirname "$image_file")
     
