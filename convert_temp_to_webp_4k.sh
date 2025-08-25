@@ -4,7 +4,7 @@
 # 원본 폴더: temp
 # 대상 폴더: temp/webp_4k
 
-SRC_DIR="temp/webp_8k"
+SRC_DIR="temp"
 DST_DIR="temp/webp_4k"
 
 # 4K 해상도
