@@ -56,7 +56,7 @@ set /a skipped_count=0
 set /a error_count=0
 
 REM 모든 이미지 파일 찾기 및 변환
-for /r "%WORK_DIR%" %%f in (*.jpg *.jpeg *.png *.tiff *.tif *.bmp *.webp) do (
+for /r "%WORK_DIR%" %%f in (*.jpg *.jpeg *.png *.tiff *.tif *.bmp) do (
     if exist "%%f" (
         call :convert_image "%%f"
     )
